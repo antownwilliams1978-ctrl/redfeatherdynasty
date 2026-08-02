@@ -16,6 +16,10 @@
     <meta name="twitter:description" content="The official digital domain of Chief Redfeather."> 
     <meta name="twitter:image" content="https://placehold.co/1200x630/1a0a2e/c9a84c?text=Red+Feather+Dynasty"> 
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%231a0a2e'/%3E%3Cellipse cx='50' cy='30' rx='8' ry='22' fill='%23c9a84c' transform='rotate(-15 50 30)'/%3E%3Cellipse cx='50' cy='30' rx='8' ry='22' fill='%23a0001e' transform='rotate(15 50 30)'/%3E%3Cellipse cx='50' cy='30' rx='6' ry='18' fill='%23c9a84c' transform='rotate(0 50 30)'/%3E%3Crect x='47' y='48' width='6' height='30' rx='3' fill='%23c9a84c'/%3E%3C/svg%3E"> 
+    
+    <!-- Ethers.js Web3 Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+
     <script type="application/ld+json"> 
     {
         "@context": "https://schema.org", 
@@ -71,9 +75,9 @@
         .hero-divider {width: 80px; height: 3px; background: linear-gradient(90deg, var(--crimson), var(--gold), var(--purple)); margin: 0 auto 2rem; border-radius: 2px; } 
         .hero-desc {max-width: 680px; margin: 0 auto 2.5rem; font-size: clamp(0.95rem, 2vw, 1.1rem); color: rgba(240,232,216,0.75); line-height: 1.8; } 
         .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3.5rem; } 
-        .btn-primary {background: linear-gradient(135deg, var(--crimson), var(--purple)); color: var(--gold); border: 1px solid var(--gold); padding: 0.85rem 2.2rem; font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; border-radius: 4px; font-weight: bold; box-shadow: 0 0 20px rgba(160,0,30,0.4); transition: transform 0.2s, box-shadow 0.2s; } 
+        .btn-primary {background: linear-gradient(135deg, var(--crimson), var(--purple)); color: var(--gold); border: 1px solid var(--gold); padding: 0.85rem 2.2rem; font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; border-radius: 4px; font-weight: bold; box-shadow: 0 0 20px rgba(160,0,30,0.4); transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; } 
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(201,168,76,0.5); } 
-        .btn-secondary {background: transparent; color: var(--gold); border: 1px solid var(--gold); padding: 0.85rem 2.2rem; font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; border-radius: 4px; transition: background 0.2s, transform 0.2s; } 
+        .btn-secondary {background: transparent; color: var(--gold); border: 1px solid var(--gold); padding: 0.85rem 2.2rem; font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; border-radius: 4px; transition: background 0.2s, transform 0.2s; cursor: pointer; } 
         .btn-secondary:hover { background: rgba(201,168,76,0.1); transform: translateY(-2px); } 
         
         /* Video players */ 
@@ -203,6 +207,7 @@
         <div class="hero-btns"> 
             <a href="#storefront" class="btn-primary">Shop via Tapstitch &amp; PopCustoms</a> 
             <a href="#community" class="btn-secondary">Join the Dynasty</a> 
+            <button id="web3-gate-btn" class="btn-primary" style="background: linear-gradient(135deg, #0d0810, #1a0a2e); border-color: #6a0dad;">🔐 Enter Web3 Vault</button>
         </div> 
         <!-- Video Grid --> 
         <div class="video-grid"> 
@@ -400,7 +405,50 @@
             <a href="media.html">Music &amp; Videos</a> 
             <a href="#connect">Connect</a> 
         </div> 
-        <div class="footer-copy">© 2025 Red Feather Dynasty. All rights reserved. Sovereign Digital Domain of Chief Redfeather.</div> 
+        <div class="footer-copy">© 2026 Red Feather Dynasty. All rights reserved. Sovereign Digital Domain of Chief Redfeather.</div> 
     </footer> 
+
+    <!-- WEB3 GATING LOGIC -->
+    <script>
+        // 1. Define your sovereign parameters (Pulled directly from your IPFS Hub configuration)
+        const contractAddress = "0x9b5fb710b27ffd9f7c3e126fa76c2c7cbcf18a97"; 
+        const vaultUrl = "https://bafkreibi6v6wplsltgz5aqs5j3swu475hv7su3acma3mxm5h5einw2gfny.ipfs.inbrowser.link/";
+        
+        // 2. The minimum code needed to read a balance on the blockchain
+        const abi = ["function balanceOf(address owner) view returns (uint256)"];
+
+        document.getElementById("web3-gate-btn").addEventListener("click", async () => {
+            // Check if they have a crypto wallet installed
+            if (typeof window.ethereum !== "undefined") {
+                try {
+                    // Prompt the user to connect their wallet
+                    await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    
+                    const provider = new ethers.providers.Web3Provider(window.ethereum);
+                    const signer = provider.getSigner();
+                    const userAddress = await signer.getAddress();
+                    
+                    // Connect silently to Polygon to check their assets
+                    const polygonRpc = new ethers.providers.JsonRpcProvider("https://polygon-rpc.com");
+                    const contract = new ethers.Contract(contractAddress, abi, polygonRpc);
+                    
+                    // Scan their wallet for your specific asset
+                    const balance = await contract.balanceOf(userAddress);
+                    
+                    if (balance > 0) {
+                        alert("Asset Verified. Welcome to the Sovereign Vault.");
+                        window.location.href = vaultUrl; // Open the gates
+                    } else {
+                        alert("Access Denied. You do not hold the required asset to enter this territory.");
+                    }
+                } catch (error) {
+                    console.error(error);
+                    alert("Transmission failed. Could not connect to wallet.");
+                }
+            } else {
+                alert("No Web3 Wallet detected. Install MetaMask or Coinbase Wallet to access the vault.");
+            }
+        });
+    </script>
 </body> 
 </html>
