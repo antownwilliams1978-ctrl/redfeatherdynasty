@@ -1,0 +1,19 @@
+backend:
+  name: github
+  repo: antownwilliams1978-ctrl/redfeatherdynasty
+  branch: main
+
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "pages"
+    label: "Website Pages"
+    files:
+      - file: "index.html"
+        label: "Gateway (Homepage)"
+        name: "home"
+        fields:
+          - {label: "Hero Title", name: "hero_title", widget: "string"}
+          - {label: "Genesis Video Link", name: "genesis_video", widget: "string"}
+          - {label: "Podcast Link", name: "podcast_link", widget: "string"}
