@@ -1,0 +1,207 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <title>The Lore — Red Feather Dynasty</title> 
+    <meta name="description" content="The historical ledger, audio archives, and ancestral timeline of the Red Feather Dynasty and the First 144."> 
+    <meta name="keywords" content="Red Feather Dynasty, The Genesis Saga, Chief Redfeather, The First 144, Indigenous history"> 
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%231a0a2e'/%3E%3Cellipse cx='50' cy='30' rx='8' ry='22' fill='%23c9a84c' transform='rotate(-15 50 30)'/%3E%3Cellipse cx='50' cy='30' rx='8' ry='22' fill='%23a0001e' transform='rotate(15 50 30)'/%3E%3Cellipse cx='50' cy='30' rx='6' ry='18' fill='%23c9a84c' transform='rotate(0 50 30)'/%3E%3Crect x='47' y='48' width='6' height='30' rx='3' fill='%23c9a84c'/%3E%3C/svg%3E"> 
+    
+    <style> 
+        :root {
+            --onyx: #0d0810; 
+            --deep: #1a0a2e; 
+            --purple: #4b0082; 
+            --royal: #6a0dad; 
+            --crimson: #a0001e; 
+            --gold: #c9a84c; 
+            --gold-light: #e8c96a; 
+            --white: #f0e8d8; 
+            --muted: #9a8a7a; 
+            --card-bg: #150920; 
+            --border: rgba(201,168,76,0.25); 
+        } 
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; } 
+        html { scroll-behavior: smooth; } 
+        body {font-family: 'Georgia', serif; background: var(--onyx); color: var(--white); overflow-x: hidden; } 
+        
+        /* ── AMBIENT GLOWS ── */ 
+        body::before {content: ''; position: fixed; top: -200px; left: -200px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(75,0,130,0.35) 0%, transparent 70%); pointer-events: none; z-index: 0; } 
+        body::after {content: ''; position: fixed; bottom: -200px; right: -200px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(160,0,30,0.25) 0%, transparent 70%); pointer-events: none; z-index: 0; } 
+        
+        /* ── NAV ── */ 
+        nav {position: sticky; top: 0; z-index: 100; background: rgba(13,8,16,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 68px; } 
+        .nav-brand {display: flex; align-items: center; gap: 0.75rem; text-decoration: none; } 
+        .nav-logo {width: 42px; height: 42px; background: linear-gradient(135deg, var(--purple), var(--crimson)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; border: 2px solid var(--gold); box-shadow: 0 0 12px rgba(201,168,76,0.4); } 
+        .nav-title {font-size: clamp(0.9rem, 2vw, 1.1rem); font-weight: bold; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); line-height: 1.1; } 
+        .nav-title span { display: block; font-size: 0.65em; color: var(--muted); letter-spacing: 0.2em; font-weight: normal; } 
+        .nav-links {display: flex; gap: 1.5rem; list-style: none; } 
+        .nav-links a {color: var(--white); text-decoration: none; font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.8; transition: opacity 0.2s, color 0.2s; } 
+        .nav-links a:hover { opacity: 1; color: var(--gold); } 
+        
+        /* ── HERO ── */ 
+        .hero-header {position: relative; z-index: 1; padding: 6rem 2rem 3rem; text-align: center; background: radial-gradient(ellipse at 50% 0%, rgba(75,0,130,0.4) 0%, transparent 60%), var(--onyx); } 
+        .hero-eyebrow {font-size: 0.75rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; border: 1px solid var(--border); padding: 0.35rem 1.2rem; border-radius: 2px; display: inline-block; } 
+        .hero-title {font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: bold; line-height: 1.1; background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 40%, var(--crimson) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 1rem; } 
+        .gold-line {width: 80px; height: 3px; background: linear-gradient(90deg, var(--crimson), var(--gold), var(--purple)); margin: 0 auto 2rem; border-radius: 2px; } 
+
+        /* ── THE LORE ARCHIVES ── */
+        .archive-container { max-width: 900px; margin: 0 auto; padding: 2rem 2rem 5rem; position: relative; z-index: 1;}
+        .lore-intro { color: rgba(240,232,216,0.85); line-height: 1.8; font-size: 1.1rem; margin-bottom: 3rem; text-align: justify; }
+        
+        .act-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 2.5rem; margin-bottom: 2rem; box-shadow: 0 0 30px rgba(75,0,130,0.15); border-left: 4px solid var(--gold); }
+        .act-title { font-size: 1.5rem; color: var(--gold-light); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.1em; }
+        .act-chapter { font-size: 0.8rem; color: var(--crimson); text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 1rem; font-weight: bold; }
+        .act-desc { color: var(--muted); line-height: 1.7; font-size: 0.95rem; margin-bottom: 1.5rem; }
+        
+        /* Custom Audio Player Wrapper */
+        .audio-wrapper { width: 100%; margin-top: 1rem; }
+        audio { width: 100%; height: 40px; outline: none; border-radius: 4px; }
+        audio::-webkit-media-controls-panel { background: rgba(201, 168, 76, 0.1); border: 1px solid var(--border); }
+        audio::-webkit-media-controls-current-time-display,
+        audio::-webkit-media-controls-time-remaining-display { color: var(--gold); }
+
+        /* ── CONNECT FORM (Same as Index) ── */ 
+        #connect { background: linear-gradient(180deg, var(--onyx) 0%, #0a0510 100%); padding: 5rem 2rem;} 
+        .connect-inner { max-width: 700px; margin: 0 auto; text-align: center; position: relative; z-index: 1;} 
+        .zone-label {font-size: 0.68rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--crimson); margin-bottom: 0.5rem; display: block; } 
+        .section-title {font-size: clamp(1.8rem, 4vw, 2.8rem); background: linear-gradient(135deg, var(--gold-light), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.75rem; } 
+        
+        .contact-form {background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 2rem; text-align: left; margin-top: 2rem;} 
+        .contact-form h3 {font-size: 1rem; color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1.5rem; text-align: center; } 
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; } 
+        .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; } 
+        .form-group label { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); } 
+        .form-group input, .form-group textarea, .form-group select {background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--white); padding: 0.7rem 1rem; border-radius: 4px; font-family: inherit; font-size: 0.9rem; transition: border-color 0.2s; } 
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {outline: none; border-color: var(--gold); } 
+        .form-group textarea { resize: vertical; min-height: 100px; } 
+        .form-group select option { background: var(--deep); } 
+        .btn-submit {width: 100%; background: linear-gradient(135deg, var(--crimson), var(--purple)); color: var(--gold); border: 1px solid var(--gold); padding: 0.9rem; font-size: 0.85rem; letter-spacing: 0.2em; text-transform: uppercase; border-radius: 4px; font-weight: bold; cursor: pointer; transition: box-shadow 0.2s, transform 0.2s; } 
+        .btn-submit:hover { box-shadow: 0 0 30px rgba(201,168,76,0.4); transform: translateY(-1px); } 
+
+        /* ── FOOTER ── */ 
+        footer {background: #080510; border-top: 1px solid var(--border); padding: 3rem 2rem 2rem; text-align: center; position: relative; z-index: 1; } 
+        .footer-brand { font-size: 1.4rem; color: var(--gold); letter-spacing: 0.2em; margin-bottom: 0.5rem; } 
+        .footer-tagline { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 2rem; } 
+        .footer-copy { font-size: 0.72rem; color: rgba(154,138,122,0.5); } 
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .form-row { grid-template-columns: 1fr; } 
+            .act-card { padding: 1.5rem; }
+        }
+    </style> 
+</head> 
+<body> 
+    <nav> 
+        <a href="index.html" class="nav-brand"> 
+            <div class="nav-logo">🪶</div> 
+            <div class="nav-title">Red Feather Dynasty<span>Sovereign Digital Domain</span></div> 
+        </a> 
+        <ul class="nav-links"> 
+            <li><a href="index.html#gateway">Gateway</a></li> 
+            <li><a href="index.html#storefront">Storefront</a></li> 
+            <li><a href="index.html#community">Community</a></li> 
+            <li><a href="lore.html">The Lore</a></li> 
+            <li><a href="media.html">Music &amp; Videos</a></li> 
+            <li><a href="#connect" style="color: var(--gold); font-weight: bold;">Connect</a></li> 
+        </ul> 
+    </nav> 
+    
+    <header class="hero-header"> 
+        <div class="hero-eyebrow">The Historical Ledger</div> 
+        <h1 class="hero-title">The Genesis Saga</h1> 
+        <div class="gold-line"></div> 
+    </header> 
+
+    <main class="archive-container">
+        <p class="lore-intro">
+            This is the sovereign archive. The Genesis Saga is not mythology; it is the timeline of the <strong>First 144</strong>. It reclaims the ancestral history of the mound cities, the biophysical reality of the original bloodlines, and the true events surrounding the Spanish invasions. Listen to the foundational audio files below.
+        </p>
+
+        <div class="act-card">
+            <h2 class="act-title">Act I: The Awakening</h2>
+            <div class="act-chapter">Chapters 1 & 2: The Dream That Would Not Leave</div>
+            <p class="act-desc">This is the opening sequence. Before the ships arrived, there was the majesty of the mound cities and flourishing trade. This transmission provides the initial acoustic trigger—the "Amen" (A-M-N) frequency—required to drop the matrix static and begin the awakening of memory.</p>
+            <div class="audio-wrapper">
+                <audio controls>
+                    <source src="ACT_1_The_Awakening_5min27s.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+        </div>
+
+        <div class="act-card">
+            <h2 class="act-title">Act II: The System</h2>
+            <div class="act-chapter">Chapters 4 & 5: De Soto and the Landing</div>
+            <p class="act-desc">The descent into the matrix. This act scores the arrival of the machine of conquest, the damp cells, and the structural suppression of the sovereign bloodlines. This is where the historical receipts of the Spanish invasions and the suppression of the Towasa are felt.</p>
+            <div class="audio-wrapper">
+                <audio controls>
+                    <source src="ACT_2_The_System_5min45s.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+        </div>
+
+        <div class="act-card">
+            <h2 class="act-title">Act III: The Awakening Returns</h2>
+            <div class="act-chapter">Chapter 10: The First 144</div>
+            <p class="act-desc">The resurrection and the assumption of the mantle. It is the realization of the piezoelectric power within the bone structure, the reactivation of the 144,000 channels, and the guardians stepping fully into their power.</p>
+            <div class="audio-wrapper">
+                <audio controls>
+                    <source src="ACT_3_The_Awakening_Returns_4min47s.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+        </div>
+    </main>
+
+    <section id="connect"> 
+        <div class="connect-inner"> 
+            <div class="section-header"> 
+                <span class="zone-label">Zone V — The Signal</span> 
+                <h2 class="section-title">Send a Transmission</h2> 
+                <div class="gold-line"></div> 
+            </div> 
+            
+            <form class="contact-form" action="https://formspree.io/f/maqrrenn" method="POST"> 
+                <h3>Contact The Council</h3> 
+                <div class="form-row"> 
+                    <div class="form-group"> 
+                        <label for="fname">First Name</label> 
+                        <input type="text" id="fname" name="fname" placeholder="Your name"> 
+                    </div> 
+                    <div class="form-group"> 
+                        <label for="email">Email</label> 
+                        <input type="email" id="email" name="email" placeholder="your@email.com"> 
+                    </div> 
+                </div> 
+                <div class="form-group"> 
+                    <label for="subject">Purpose</label> 
+                    <select id="subject" name="subject"> 
+                        <option value="">Select your purpose...</option> 
+                        <option>Join the First 144</option> 
+                        <option>Commerce / Partnership</option> 
+                        <option>Media / Press Inquiry</option> 
+                        <option>General Transmission</option> 
+                    </select> 
+                </div> 
+                <div class="form-group"> 
+                    <label for="message">Message</label> 
+                    <textarea id="message" name="message" placeholder="Speak your truth..."></textarea> 
+                </div> 
+                <button type="submit" class="btn-submit">Send Transmission</button> 
+            </form> 
+        </div> 
+    </section> 
+    
+    <footer> 
+        <div class="footer-brand">🪶 RED FEATHER DYNASTY</div> 
+        <div class="footer-tagline">Sovereign · Ancestral · Cinematic · Eternal</div> 
+        <div class="footer-copy">© 2026 Red Feather Dynasty. All rights reserved. Sovereign Digital Domain of Chief Redfeather.</div> 
+    </footer> 
+
+</body> 
+</html>
